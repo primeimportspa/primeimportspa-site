@@ -163,3 +163,52 @@ footer-note {
   color: #777;
   font-size: 0.9rem;
 }
+/* Submenús */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #2d2d2d;
+  min-width: 220px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 4px;
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #444;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Responsive: en móviles, el submenú se muestra como bloque */
+@media (max-width: 768px) {
+  .dropdown {
+    width: 100%;
+  }
+  .dropdown-content {
+    position: static;
+    box-shadow: none;
+    background-color: #333;
+  }
+}
