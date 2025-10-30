@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cómo identificar un ESP32-WROOM-32E original – Prime Imports SpA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/style.css">
+  <!-- Prism.js CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" integrity="sha512-kSwGoyIkfz4+hMo5jkPH+HsV46P9UD9pCBWh2UAnH+OKFl1tF09aZzLYyL8VMR8fU4KqgN9NHSUjH507mFD+ZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <nav>
+    <div class="section">Prime Imports SpA</div>
+    <a href="/">Inicio</a>
+    <div class="section">Productos</div>
+    <a href="/productos/esp32-wroom-32e/">ESP32-WROOM-32E</a>
+    <a href="/productos/mean-well-lrs50/">Fuente Mean Well LRS-50-12</a>
+    <a href="/productos/mean-well-lrs100/">Fuente Mean Well LRS-100-5</a>
+    <a href="/productos/ventilador-sunon-12v/">Ventilador Sunon 12V</a>
+    <div class="section">Recursos</div>
+    <a href="/guias/">Guías Técnicas</a>
+    <a href="/politicas/envios/">Envíos</a>
+    <a href="/contacto/">Contacto</a>
+  </nav>
+  <main>
+    <h1>Cómo identificar un ESP32-WROOM-32E original</h1>
+    <p class="meta">Basado en el <a href="https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32e_esp32-wroom-32ue_datasheet_en.pdf" target="_blank">datasheet oficial de Espressif (2025)</a></p>
+
+    <p>El módulo <strong>ESP32-WROOM-32E</strong> es ampliamente falsificado en el mercado chileno. Esta guía te enseña a distinguir un módulo original usando criterios técnicos verificables.</p>
+
+    <h2>1. Características físicas (según Espressif)</h2>
+    <p>El datasheet oficial (Sección 1.1, Figura 1) describe las siguientes características del módulo auténtico:</p>
+    <ul>
+      <li><strong>Chip principal</strong>: debe decir claramente “<strong>ESP32-D0WD</strong>” con el logo de Espressif.</li>
+      <li><strong>Flash SPI</strong>: chip de <strong>4 MB</strong> de marcas autorizadas: “<strong>Winbond W25Q32JV</strong>” o “<strong>ISSI IS25LP032D</strong>”.</li>
+      <li><strong>Regulador de voltaje</strong>: “<strong>AMS1117-3.3</strong>” (marca “AMS” o “1117”).</li>
+      <li><strong>PCB</strong>: color verde oscuro, con serigrafía nítida y el código “<strong>WROOM-32E</strong>” en la parte inferior.</li>
+    </ul>
+    <p>⚠️ <em>Nota: Las imágenes en esta guía son de referencia, extraídas del datasheet oficial de Espressif. Al recibir nuestros módulos, actualizaremos con fotos reales.</em></p>
+
+    <h2>2. Prueba técnica con Arduino</h2>
+    <p>Un módulo original reportará correctamente su modelo y flash mediante la API oficial de Espressif. Sube este código:</p>
+
+    <pre><code class="language-cpp">#include "esp_chip_info.h"
+#include "esp_flash.h"
+
+void setup() {
+  Serial.begin(115200);
+  while (!Serial);
+
+  esp_chip_info_t chip_info;
+  esp_chip_info(&chip_info);
+
+  Serial.println("=== Información del chip ESP32 ===");
+  Serial.print("Cores: ");
+  Serial.println(chip_info.cores);
+  Serial.print("Tipo: ");
+  if (chip_info.model == CHIP_ESP32) Serial.println("ESP32");
+  else Serial.println("Desconocido");
+
+  Serial.print("Revisión: ");
+  Serial.println(chip_info.revision);
+  Serial.print("Flash: ");
+  Serial.print(esp_flash_get_size(NULL) / (1024 * 1024));
+  Serial.println(" MB");
+}
+
+void loop() {
+  delay(10000);
+}</code></pre>
+
+    <p>Un módulo original mostrará:</p>
+    <pre><code>=== Información del chip ESP32 ===
+Cores: 2
+Tipo: ESP32
+Revisión: 1
+Flash: 4 MB</code></pre>
+
+    <p>Las réplicas suelen mostrar “0 MB”, “Desconocido” o reiniciarse al ejecutar este código.</p>
+
+    <h2>3. ¿Por qué importa usar el original?</h2>
+    <ul>
+      <li>✅ <strong>Soporte oficial</strong>: actualizaciones del SDK Arduino-ESP32 y ESP-IDF.</li>
+      <li>✅ <strong>4 MB de flash certificada</strong>: no 2 MB como en muchas réplicas.</li>
+      <li>❌ <strong>Las réplicas</strong> carecen de certificaciones FCC/CE y tienen problemas con OTA, Bluetooth y sensores internos.</li>
+    </ul>
+
+    <h2>4. Dónde comprar con garantía</h2>
+    <p>En Prime Imports SpA, vendemos <strong>solo módulos ESP32-WROOM-32E originales</strong>, adquiridos de distribuidores autorizados de Espressif.</p>
+    <p>¿Interesado? Escríbenos a: <a href="mailto:ventas@primeimportsspa.cl">ventas@primeimportsspa.cl</a></p>
+
+    <h2>Referencias oficiales</h2>
+    <ul>
+      <li><a href="https://www.espressif.com/en/products/modules/esp32-wroom-32e" target="_blank">Página del producto – Espressif</a></li>
+      <li><a href="https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32e_esp32-wroom-32ue_datasheet_en.pdf" target="_blank">Datasheet oficial (PDF)</a></li>
+      <li><a href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/chip_info.html" target="_blank">Documentación de esp_chip_info</a></li>
+    </ul>
+
+  </main>
+
+  <!-- Prism.js JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha512-9H+K3QfGIrmCnYy0Zu2+ce0CjC6p1t/s3L8zfW8Z9kZmN+04cjyLl9F3/9UdX7L0jZso2QKqOZ8WlDcLs8w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-S2lgZf+3X+RNOpc50jG2qCU3xkll/7nWg54qOGU6FiRYMw3oX4Yq0EcZ3vQg8hD4W4ZqgN9NHSUjH507mFD+ZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>
