@@ -1,5 +1,3 @@
----
----
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,8 +5,6 @@
   <title>Prime Imports SpA</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/style.css">
-  <!-- Prism.js CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" integrity="sha512-kSwGoyIkfz4+hMo5jkPH+HsV46P9UD9pCBWh2UAnH+OKFl1tF09aZzLYyL8VMR8fU4KqgN9NHSUjH507mFD+ZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
   <nav>
@@ -20,74 +16,35 @@
     <a href="/productos/mean-well-lrs100/">Fuente Mean Well LRS-100-5</a>
     <a href="/productos/ventilador-sunon-12v/">Ventilador Sunon 12V</a>
     <div class="section">Recursos</div>
-    <a href="/guias/esp32-autenticacion/">Guía: ESP32 Original</a>
-    <a href="/guias/mean-well-autenticacion/">Guía: Mean Well Original</a>
-    <a href="/guias/ventilador-pwm/">Guía: Control de Ventiladores 12V</a>
+    <a href="/guias/esp32-autenticacion/">Guías Técnicas</a>
+    <a href="/politicas/envios/">Envíos</a>
     <a href="/contacto/">Contacto</a>
   </nav>
   <main>
     <h1><span class="highlight">Prime</span> Imports SpA</h1>
-    <p><strong>Componentes electrónicos originales para makers, técnicos y empresas en Chile.</strong></p>
+    <p class="tagline">Componentes electrónicos 100% originales para técnicos y makers en Chile.</p>
 
-    <h2>¿Por qué comprar con nosotros?</h2>
-    <ul>
-      <li>✅ <strong>Productos 100% originales</strong>: ESP32, fuentes Mean Well, ventiladores Sunon, sensores Bosch.</li>
-      <li>✅ <strong>Factura con RUT</strong>: respaldo fiscal para empresas y técnicos.</li>
-      <li>✅ <strong>Guías técnicas en español</strong>: código listo para usar, diagramas de conexión, soporte postventa.</li>
-      <li>✅ <strong>Envíos rápidos</strong>: Starken 24–48 hrs en Santiago.</li>
-    </ul>
+    <div class="hero-cards">
+      <div class="card">
+        <h2>🔍 Autenticidad garantizada</h2>
+        <p>Vendemos solo componentes originales, con guías para detectar falsificaciones.</p>
+        <a href="/guias/esp32-autenticacion/">Ver guías técnicas →</a>
+      </div>
+      <div class="card">
+        <h2>📦 Productos listos para usar</h2>
+        <p>ESP32, fuentes Mean Well, ventiladores Sunon y más, con stock real.</p>
+        <a href="/productos/esp32-wroom-32e/">Ver productos →</a>
+      </div>
+      <div class="card">
+        <h2>✉️ Soporte técnico real</h2>
+        <p>Respuesta en menos de 24 horas por parte de un técnico, no un bot.</p>
+        <a href="/contacto/">Contactar →</a>
+      </div>
+    </div>
 
-    <h2>Nuestros productos iniciales (disponibles desde el 1° de noviembre)</h2>
-    <ul>
-      <li><strong>ESP32-WROOM-32E</strong>: módulo IoT original, con Bluetooth y Wi-Fi, 4 MB flash.</li>
-      <li><strong>Fuente Mean Well LRS-50-12</strong>: 12V/4.2A, ideal para routers, cámaras y sistemas de automatización.</li>
-      <li><strong>Fuente Mean Well LRS-100-5</strong>: 5V/20A, para proyectos de alto consumo (LED, servos, Raspberry Pi clusters).</li>
-      <li><strong>Ventilador Sunon EF92251S3-A99-A</strong>: 12V, 92mm, 67 m³/h, 28 dBA, vida útil de 50.000 horas.</li>
-    </ul>
-
-    <h2>Guías técnicas gratuitas</h2>
-    <p>No vendemos kits armados (por ahora), pero te enseñamos a usar los componentes tú mismo:</p>
-    <ul>
-      <li><a href="/guias/esp32-autenticacion/">Cómo identificar un ESP32 original</a></li>
-      <li><a href="/guias/mean-well-autenticacion/">Cómo identificar una fuente Mean Well falsa</a></li>
-      <li><a href="/guias/ventilador-pwm/">Control PWM de ventiladores 12V con ESP32</a></li>
-    </ul>
-
-    <h2>Soporte técnico</h2>
-    <p>¿Tienes dudas sobre un componente o guía?</p>
-    <ul>
-      <li>Para <strong>ventas</strong>: <a href="mailto:ventas@primeimportsspa.cl">ventas@primeimportsspa.cl</a></li>
-      <li>Para <strong>soporte técnico</strong>: <a href="mailto:soporte@primeimportsspa.cl">soporte@primeimportsspa.cl</a></li>
-      <li>Para <strong>consultas generales</strong>: <a href="mailto:info@primeimportsspa.cl">info@primeimportsspa.cl</a></li>
-    </ul>
-
-    <!-- Ejemplo de código resaltado -->
-    <h2>Ejemplo: Lectura de sensor con ESP32</h2>
-    <pre><code class="language-cpp">#include "DHT.h"
-#define DHTPIN 4
-#define DHTTYPE DHT22
-
-DHT dht(DHTPIN, DHTTYPE);
-
-void setup() {
-  Serial.begin(115200);
-  dht.begin();
-}
-
-void loop() {
-  float h = dht.readHumidity();
-  float t = dht.readTemperature();
-  if (!isnan(h) && !isnan(t)) {
-    Serial.print("Humedad: "); Serial.print(h);
-    Serial.print("% Temp: "); Serial.println(t);
-  }
-  delay(2000);
-}</code></pre>
-
+    <footer-note>
+      <p>Prime Imports SpA – RUT 78.277.312-7</p>
+    </footer-note>
   </main>
-
-  <!-- Prism.js JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha512-9H+K3QfGIrmCnYy0Zu2+ce0CjC6p1t/s3L8zfW8Z9kZmN+04cjyLl9F3/9UdX7L0jZso2QKqOZ8WlDcLs8w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-S2lgZf+3X+RNOpc50jG2qCU3xkll/7nWg54qOGU6FiRYMw3oX4Yq0EcZ3vQg8hD4W4ZqgN9NHSUjH507mFD+ZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 </html>
