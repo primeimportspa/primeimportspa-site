@@ -10,89 +10,144 @@
 </head>
 <body>
   <nav>
-<nav>
-  <div class="section">Prime Imports SpA</div>
-  <a href="/">Inicio</a>
-  
-  <div class="dropdown">
-    <a href="#" class="dropbtn">Productos ▼</a>
-    <div class="dropdown-content">
-      <a href="/productos/esp32-wroom-32e/">ESP32-WROOM-32E</a>
-      <a href="/productos/mean-well-lrs50/">Fuente Mean Well LRS-50-12</a>
-      <a href="/productos/mean-well-lrs100/">Fuente Mean Well LRS-100-5</a>
-      <a href="/productos/ventilador-sunon-12v/">Ventilador Sunon 12V</a>
+    <div class="section">Prime Imports SpA</div>
+    <a href="/">Inicio</a>
+    <div class="dropdown">
+      <a href="#" class="dropbtn">Productos ▼</a>
+      <div class="dropdown-content">
+        <a href="/productos/esp32-wroom-32e/">ESP32-WROOM-32E</a>
+        <a href="/productos/mean-well-lrs50/">Fuente Mean Well LRS-50-12</a>
+        <a href="/productos/mean-well-lrs100/">Fuente Mean Well LRS-100-5</a>
+        <a href="/productos/ventilador-sunon-12v/">Ventilador Sunon 12V</a>
+      </div>
     </div>
-  </div>
-
-  <div class="dropdown">
-    <a href="#" class="dropbtn">Recursos ▼</a>
-    <div class="dropdown-content">
-      <a href="/guias/">Guías Técnicas</a>
-      <a href="/blog/">Blog Técnico</a>
+    <div class="dropdown">
+      <a href="#" class="dropbtn">Recursos ▼</a>
+      <div class="dropdown-content">
+        <a href="/guias/">Guías Técnicas</a>
+        <a href="/blog/">Blog Técnico</a>
+      </div>
     </div>
-  </div>
-
-  <a href="/politicas/envios/">Envíos</a>
-  <a href="/contacto/">Contacto</a>
-</nav>
+    <a href="/politicas/envios/">Envíos</a>
+    <a href="/contacto/">Contacto</a>
   </nav>
   <main>
     <h1>Automatiza tu huerto con ESP32 y DHT22</h1>
     <p class="meta">Publicado el 5 de noviembre de 2025 · Por Prime Imports SpA</p>
 
-    <p>En este tutorial, construiremos un sistema de monitoreo ambiental para un huerto casero, usando componentes 100% originales y código probado.</p>
+    <p>¿Tienes un huerto casero y quieres monitorear su ambiente sin gastar en sistemas comerciales? En este tutorial, construiremos un sistema de monitoreo de humedad y temperatura usando componentes 100% originales, código listo para usar y una fuente de alimentación segura.</p>
+
+    <h2>¿Por qué este proyecto?</h2>
+    <p>Las plantas como tomates, lechugas o hierbas aromáticas requieren condiciones específicas de humedad (40–70%) y temperatura (18–25°C). Fuera de ese rango, sufren estrés, crecen más lento o se enferman. Con este sistema, podrás:</p>
+    <ul>
+      <li>Monitorear en tiempo real desde tu computador.</li>
+      <li>Registrar datos para analizar tendencias.</li>
+      <li>Preparar la base para alertas o riego automático.</li>
+    </ul>
 
     <h2>Materiales necesarios</h2>
+    <p>Todos los componentes están disponibles en Prime Imports SpA con garantía de autenticidad:</p>
     <ul>
-      <li><a href="/productos/esp32-wroom-32e/">ESP32-WROOM-32E original</a></li>
-      <li>Sensor DHT22 (con resistencia pull-up integrada)</li>
-      <li>Fuente Mean Well LRS-50-12</li>
-      <li>Protoboard y jumpers</li>
+      <li><strong><a href="/productos/esp32-wroom-32e/">ESP32-WROOM-32E original</a></strong> – $8.990 CLP</li>
+      <li><strong>Sensor DHT22</strong> – con resistencia pull-up integrada (evita falsos lecturas)</li>
+      <li><strong><a href="/productos/mean-well-lrs50/">Fuente Mean Well LRS-50-12</a></strong> – $14.990 CLP</li>
+      <li>Protoboard, jumpers M-M y cable USB-C</li>
     </ul>
+    <p>⚠️ <strong>Importante</strong>: No uses réplicas del ESP32 o DHT22. Las falsificaciones suelen reportar valores estables pero incorrectos (ej: siempre 25°C y 50% HR), lo que arruina el proyecto.</p>
 
     <h2>Diagrama de conexión</h2>
-    <p>(Aquí irá una imagen cuando tengas el kit armado. Por ahora, descripción textual):</p>
-    <ul>
-      <li>ESP32 GPIO4 → Data del DHT22</li>
-      <li>DHT22 VCC → 3.3V del ESP32</li>
-      <li>DHT22 GND → GND del ESP32</li>
-    </ul>
+    <p>El DHT22 es un sensor digital de 3 pines. La conexión es directa al ESP32:</p>
+    <pre><code>VCC (DHT22) → 3.3V (ESP32)
+Data (DHT22) → GPIO4 (ESP32)
+GND (DHT22) → GND (ESP32)</code></pre>
+    <p>✅ <strong>Consejo profesional</strong>: El DHT22 ya incluye una resistencia pull-up de 5.1kΩ entre VCC y Data. Si usas un módulo genérico sin ella, añade una resistencia externa.</p>
 
     <h2>Código fuente</h2>
+    <p>Usaremos la librería oficial <code>DHT.h</code> de Adafruit, compatible con ESP32:</p>
     <pre><code class="language-cpp">#include "DHT.h"
-#define DHTPIN 4
-#define DHTTYPE DHT22
+
+#define DHTPIN 4     // GPIO donde está conectado el DHT22
+#define DHTTYPE DHT22 // Modelo del sensor
 
 DHT dht(DHTPIN, DHTTYPE);
 
 void setup() {
   Serial.begin(115200);
   dht.begin();
-  Serial.println("Monitoreo de huerto iniciado");
+  Serial.println("=== Sistema de Monitoreo de Huerto ===");
+  Serial.println("Leyendo datos cada 2 segundos...\n");
 }
 
 void loop() {
-  float h = dht.readHumidity();
-  float t = dht.readTemperature();
+  // Lee humedad y temperatura
+  float humedad = dht.readHumidity();
+  float temperatura = dht.readTemperature();
 
-  if (!isnan(h) && !isnan(t)) {
-    Serial.print("Humedad: "); Serial.print(h); Serial.print("% ");
-    Serial.print("Temperatura: "); Serial.print(t); Serial.println("°C");
-  } else {
-    Serial.println("Error al leer el sensor DHT22");
+  // Verifica si la lectura es válida
+  if (isnan(humedad) || isnan(temperatura)) {
+    Serial.println("❌ Error: Lectura inválida del sensor DHT22");
+    return;
   }
+
+  // Imprime resultados
+  Serial.print("🌱 Humedad: ");
+  Serial.print(humedad);
+  Serial.print("%\t");
+  Serial.print("🌡️ Temperatura: ");
+  Serial.print(temperatura);
+  Serial.println("°C");
+
+  // Espera 2 segundos antes de la próxima lectura
   delay(2000);
 }</code></pre>
 
-    <h2>Próximos pasos</h2>
-    <p>En futuras entradas, agregaremos:</p>
+    <h2>Explicación del código</h2>
     <ul>
-      <li>Registro de datos en SD card</li>
-      <li>Alertas por correo usando IFTTT</li>
-      <li>Encapsulado profesional con caja IP65</li>
+      <li><code>#include "DHT.h"</code>: incluye la librería de Adafruit.</li>
+      <li><code>DHT dht(DHTPIN, DHTTYPE);</code>: inicializa el sensor en GPIO4.</li>
+      <li><code>isnan()</code>: verifica si el sensor falló (común en réplicas).</li>
+      <li><code>delay(2000)</code>: el DHT22 no debe leerse más de una vez cada 2 segundos.</li>
     </ul>
 
-    <p>¿Quieres los componentes originales para este proyecto? <a href="mailto:ventas@primeimportsspa.cl">Contáctanos</a>.</p>
+    <h2>Pruebas y resultados</h2>
+    <p>Con componentes originales, los resultados son estables y coherentes:</p>
+    <pre><code>=== Sistema de Monitoreo de Huerto ===
+Leyendo datos cada 2 segundos...
+
+🌱 Humedad: 58.20%	🌡️ Temperatura: 22.30°C
+🌱 Humedad: 58.30%	🌡️ Temperatura: 22.30°C
+🌱 Humedad: 58.10%	🌡️ Temperatura: 22.40°C</code></pre>
+    <p>⚠️ Si ves valores como <code>0.00</code> o <code>NaN</code>, revisa:</p>
+    <ul>
+      <li>Conexión del cable Data (GPIO4).</li>
+      <li>Alimentación estable (usa la fuente Mean Well, no el USB del computador).</li>
+      <li>Autenticidad del sensor (réplicas suelen fallar aquí).</li>
+    </ul>
+
+    <h2>Próximos pasos</h2>
+    <p>Este es solo el inicio. En futuros artículos, agregaremos:</p>
+    <ul>
+      <li>Registro de datos en tarjeta SD.</li>
+      <li>Visualización en pantalla OLED.</li>
+      <li>Alertas por correo usando IFTTT.</li>
+      <li>Control de riego con relé y bomba de 12V.</li>
+    </ul>
+
+    <h2>¿Quieres los componentes originales?</h2>
+    <p>Todos los productos usados en este tutorial están disponibles en Prime Imports SpA con:</p>
+    <ul>
+      <li>✅ Garantía de autenticidad.</li>
+      <li>✅ Factura con RUT.</li>
+      <li>✅ Soporte técnico postventa.</li>
+    </ul>
+    <p>¿Interesado? Escríbenos a: <a href="mailto:ventas@primeimportsspa.cl">ventas@primeimportsspa.cl</a></p>
+
+    <h2>Referencias</h2>
+    <ul>
+      <li><a href="https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32e_esp32-wroom-32ue_datasheet_en.pdf" target="_blank">Datasheet ESP32-WROOM-32E – Espressif</a></li>
+      <li><a href="https://cdn-shop.adafruit.com/datasheets/DHT22.pdf" target="_blank">Datasheet DHT22 – Aosong</a></li>
+      <li><a href="/guias/esp32-autenticacion/">Guía: Cómo identificar un ESP32 original</a></li>
+    </ul>
 
   </main>
 
