@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Automatiza tu huerto con ESP32 y DHT22 – Prime Imports SpA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/style.css">
+  <!-- Prism.js CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" integrity="sha512-kSwGoyIkfz4+hMo5jkPH+HsV46P9UD9pCBWh2UAnH+OKFl1tF09aZzLYyL8VMR8fU4KqgN9NHSUjH507mFD+ZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <nav>
+    <!-- mismo menú que arriba -->
+  </nav>
+  <main>
+    <h1>Automatiza tu huerto con ESP32 y DHT22</h1>
+    <p class="meta">Publicado el 5 de noviembre de 2025 · Por Prime Imports SpA</p>
+
+    <p>En este tutorial, construiremos un sistema de monitoreo ambiental para un huerto casero, usando componentes 100% originales y código probado.</p>
+
+    <h2>Materiales necesarios</h2>
+    <ul>
+      <li><a href="/productos/esp32-wroom-32e/">ESP32-WROOM-32E original</a></li>
+      <li>Sensor DHT22 (con resistencia pull-up integrada)</li>
+      <li>Fuente Mean Well LRS-50-12</li>
+      <li>Protoboard y jumpers</li>
+    </ul>
+
+    <h2>Diagrama de conexión</h2>
+    <p>(Aquí irá una imagen cuando tengas el kit armado. Por ahora, descripción textual):</p>
+    <ul>
+      <li>ESP32 GPIO4 → Data del DHT22</li>
+      <li>DHT22 VCC → 3.3V del ESP32</li>
+      <li>DHT22 GND → GND del ESP32</li>
+    </ul>
+
+    <h2>Código fuente</h2>
+    <pre><code class="language-cpp">#include "DHT.h"
+#define DHTPIN 4
+#define DHTTYPE DHT22
+
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+  Serial.begin(115200);
+  dht.begin();
+  Serial.println("Monitoreo de huerto iniciado");
+}
+
+void loop() {
+  float h = dht.readHumidity();
+  float t = dht.readTemperature();
+
+  if (!isnan(h) && !isnan(t)) {
+    Serial.print("Humedad: "); Serial.print(h); Serial.print("% ");
+    Serial.print("Temperatura: "); Serial.print(t); Serial.println("°C");
+  } else {
+    Serial.println("Error al leer el sensor DHT22");
+  }
+  delay(2000);
+}</code></pre>
+
+    <h2>Próximos pasos</h2>
+    <p>En futuras entradas, agregaremos:</p>
+    <ul>
+      <li>Registro de datos en SD card</li>
+      <li>Alertas por correo usando IFTTT</li>
+      <li>Encapsulado profesional con caja IP65</li>
+    </ul>
+
+    <p>¿Quieres los componentes originales para este proyecto? <a href="mailto:ventas@primeimportsspa.cl">Contáctanos</a>.</p>
+
+  </main>
+
+  <!-- Prism.js JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha512-9H+K3QfGIrmCnYy0Zu2+ce0CjC6p1t/s3L8zfW8Z9kZmN+04cjyLl9F3/9UdX7L0jZso2QKqOZ8WlDcLs8w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-S2lgZf+3X+RNOpc50jG2qCU3xkll/7nWg54qOGU6FiRYMw3oX4Yq0EcZ3vQg8hD4W4ZqgN9NHSUjH507mFD+ZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>
