@@ -212,3 +212,52 @@ footer-note {
     background-color: #333;
   }
 }
+/* Estilo para el blog */
+article {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+article h2 {
+  font-size: 1.4rem;
+  margin: 0 0 0.5rem;
+}
+
+article h2 a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+article h2 a:hover {
+  text-decoration: underline;
+}
+
+.meta {
+  color: #777;
+  font-style: italic;
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 0.8rem;
+}
+
+article p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+/* Responsive para blog */
+@media (max-width: 768px) {
+  article h2 {
+    font-size: 1.25rem;
+  }
+
+  .meta {
+    font-size: 0.85rem;
+  }
+}
