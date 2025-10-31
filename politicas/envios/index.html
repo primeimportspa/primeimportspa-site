@@ -1,88 +1,137 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Política de Envíos – Prime Imports SpA</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/styles/main.css" />
+  <style>
+    /* Estilos mínimos para que el menú funcione si no están en main.css */
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+    }
+    nav a, nav .section {
+      text-decoration: none;
+      color: #000;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+    }
+    nav .section {
+      font-weight: bold;
+      background-color: #e9ecef;
+    }
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #fff;
+      min-width: 200px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      z-index: 1;
+      flex-direction: column;
+    }
+    .dropdown-content a {
+      padding: 0.75rem 1rem;
+      display: block;
+      color: #000;
+    }
+    .dropdown:hover .dropdown-content {
+      display: flex;
+    }
+    .dropbtn::after {
+      content: "";
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      line-height: 1.6;
+    }
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      padding: 1rem;
+    }
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .dropdown-content {
+        position: static;
+        box-shadow: none;
+        padding-left: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-<nav>
-  <div class="section">Prime Imports SpA</div>
-  <a href="/">Inicio</a>
-  
-  <div class="dropdown">
-    <a href="#" class="dropbtn">Productos ▼</a>
-    <div class="dropdown-content">
-      <a href="/productos/esp32-wroom-32e/">ESP32-WROOM-32E</a>
-      <a href="/productos/mean-well-lrs50/">Fuente Mean Well LRS-50-12</a>
-      <a href="/productos/mean-well-lrs100/">Fuente Mean Well LRS-100-5</a>
-      <a href="/productos/ventilador-sunon-12v/">Ventilador Sunon 12V</a>
+  <nav>
+    <div class="section">Prime Imports SpA</div>
+    <a href="/">Inicio</a>
+    
+    <div class="dropdown">
+      <a href="#" class="dropbtn">Productos ▼</a>
+      <div class="dropdown-content">
+        <a href="/productos/esp32-wroom-32e/">ESP32-WROOM-32E</a>
+        <a href="/productos/mean-well-lrs50/">Fuente Mean Well LRS-50-12</a>
+        <a href="/productos/mean-well-lrs100/">Fuente Mean Well LRS-100-5</a>
+        <a href="/productos/ventilador-sunon-12v/">Ventilador Sunon 12V</a>
+      </div>
     </div>
-  </div>
 
-  <div class="dropdown">
-    <a href="#" class="dropbtn">Recursos ▼</a>
-    <div class="dropdown-content">
-      <a href="/guias/">Guías Técnicas</a>
-      <a href="/blog/">Blog Técnico</a>
+    <div class="dropdown">
+      <a href="#" class="dropbtn">Recursos ▼</a>
+      <div class="dropdown-content">
+        <a href="/guias/">Guías Técnicas</a>
+        <a href="/blog/">Blog Técnico</a>
+      </div>
     </div>
-  </div>
 
-  <a href="/politicas/envios/">Envíos</a>
-  <a href="/contacto/">Contacto</a>
-</nav>
+    <a href="/politicas/envios/">Envíos</a>
+    <a href="/contacto/">Contacto</a>
+  </nav>
+
   <main>
     <h1>Política de Envíos</h1>
-    <p>Trabajamos con <strong>Starken</strong> para garantizar entregas rápidas y seguras en todo Chile.</p>
 
-    <h2>Zonas logísticas de Starken</h2>
-    <p>Starken clasifica las direcciones de entrega en cuatro categorías según complejidad de acceso y costo operativo:</p>
+    <p>En Prime Imports SpA trabajamos con <strong>Starken</strong> como proveedor logístico principal, por su confiabilidad, cobertura nacional y seguimiento en tiempo real.</p>
+
+    <h2>¿Cómo se calcula el costo de envío?</h2>
+    <p>El costo de envío <strong>depende de tu comuna de destino y del peso/volumen del paquete</strong>. No aplicamos envío gratis en esta etapa, ya que priorizamos la transparencia y la sostenibilidad de nuestro servicio.</p>
+
+    <p>Los costos aproximados son:</p>
     <ul>
-      <li><strong>Personas</strong>: zonas urbanas planas (ej: Santiago centro, Providencia).</li>
-      <li><strong>Colina</strong>: sectores con pendientes moderadas (ej: Ñuñoa, La Reina).</li>
-      <li><strong>Montaña</strong>: calles empinadas o sinuosas (ej: partes altas de Vitacura).</li>
-      <li><strong>Cordillera</strong>: zonas rurales o de difícil acceso (ej: Farellones).</li>
-    </ul>
-    <p>La zona se asigna <strong>automáticamente por Starken</strong> según tu dirección de entrega.</p>
-
-    <h2>Tarifas estimadas (programa Somos Partner)</h2>
-    <p>Para paquetes <strong>XS (hasta 500 g)</strong> en la Región Metropolitana:</p>
-    <table>
-      <thead>
-        <tr>
-          <th>Zona</th>
-          <th>Tarifa (CLP)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>Personas</td><td>$2.820</td></tr>
-        <tr><td>Colina</td><td>$3.170</td></tr>
-        <tr><td>Montaña</td><td>$2.990</td></tr>
-        <tr><td>Cordillera</td><td>$2.820</td></tr>
-      </tbody>
-    </table>
-    <p>El costo exacto se informa al cotizar tu pedido, antes de confirmar la compra.</p>
-
-    <h2>Tiempos de entrega</h2>
-    <ul>
-      <li><strong>Santiago</strong>: 24–48 horas hábiles.</li>
-      <li><strong>Regiones</strong>: 2–5 días hábiles, según destino.</li>
+      <li><strong>Misma comuna o zonas cercanas (Santiago Centro, Providencia, Las Condes, etc.)</strong>: desde <strong>CLP\$2.820</strong>.</li>
+      <li><strong>Zonas extendidas (Cordillera, Montaña, Sur, Norte)</strong>: entre <strong>CLP\$3.800 y CLP\$4.900</strong>, según ubicación.</li>
     </ul>
 
-    <h2>¿Cómo funciona?</h2>
-    <ol>
-      <li>Al realizar tu pedido, nos indicas tu dirección de entrega.</li>
-      <li>Cotizamos el envío con Starken y te enviamos el costo exacto.</li>
-      <li>Si aceptas, despachamos tu pedido el mismo día (si es antes de las 15:00 hrs).</li>
-    </ol>
+    <p>Al finalizar tu compra en nuestro sitio web, te indicaremos el costo exacto antes de confirmar el pago.</p>
 
-    <h2>Preguntas frecuentes</h2>
-    <p><strong>¿Puedo recoger en sucursal?</strong><br>
-    Sí, puedes elegir retiro en una sucursal Starken al cotizar.</p>
-    <p><strong>¿Qué pasa si no estoy en el domicilio?</strong><br>
-    Starken realizará un segundo intento al día siguiente.</p>
+    <h2>¿Por qué no ofrecemos envío gratis?</h2>
+    <p>Estamos en una etapa inicial con un catálogo reducido y recursos limitados. Para garantizar la calidad de nuestros productos (componentes genuinos, documentación técnica y soporte postventa), no subsidiamos costos logísticos que podrían comprometer la viabilidad del negocio.</p>
+    <p>Creemos que es más honesto mostrar el costo real del envío desde el principio.</p>
 
+    <h2>¿Retiro en tienda?</h2>
+    <p>Actualmente no contamos con local físico, pero si vives en Santiago y deseas coordinar un punto de encuentro cercano a nuestra zona de operaciones, escríbenos a <a href="mailto:ventas@primeimportsspa.cl">ventas@primeimportsspa.cl</a> para evaluar opciones.</p>
+
+    <h2>¿Tienes dudas sobre tu envío?</h2>
+    <p>Una vez despachado, recibirás un número de seguimiento para rastrear tu paquete en la web de Starken. Si tienes preguntas antes o después del envío, estamos disponibles por correo electrónico.</p>
+
+    <p>Gracias por entender nuestro enfoque cuidadoso y por apoyar un proyecto técnico hecho con atención al detalle.</p>
   </main>
+
+  <footer>
+    <p><a href="/">← Volver al inicio</a></p>
+  </footer>
 </body>
 </html>
